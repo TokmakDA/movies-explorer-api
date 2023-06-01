@@ -1,17 +1,17 @@
 const express = require('express');
-const process = require('process');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { requestLogger, errorLogger } = require('./middlewares/loggers');
 const routes = require('./routes');
+const { MONGO_URL } = require('./config');
 
 const app = express();
-const { PORT = 3000, DB_ADDRESS = 'mongodb://localhost:27017/bitfilmsdb' } =
+const { PORT = 3000} =
   process.env;
 
-mongoose.connect(DB_ADDRESS).catch((err) => {
+mongoose.connect(MONGO_URL).catch((err) => {
   console.log(err);
 });
 
@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.json());
 // app.use(bodyParser.json());
 // app.use(cors(corsOptions));
-// app.use('/', routes);
+app.use('/', routes);
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 // централизованный обработчик ошибок

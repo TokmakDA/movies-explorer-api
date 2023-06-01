@@ -1,36 +1,53 @@
 const mongoose = require('mongoose');
-const { messageSchemes, validateScheme } = require('../utils/validateMongoScheme');
+const {
+  messageSchemes,
+  validateScheme,
+} = require('../utils/validateMongoScheme');
 
 const { Schema } = mongoose;
 
 const movieSchema = new Schema(
   {
-    country: {
+    movieId: {
+      type: Number,
+      required: [true, messageSchemes.required],
+    },
+    nameRU: {
       type: String,
       required: [true, messageSchemes.required],
-      alias: 'страна создания фильма',
+    },
+    nameEN: {
+      type: String,
+      required: [true, messageSchemes.required],
     },
     director: {
       type: String,
       required: [true, messageSchemes.required],
     },
-    duration: {},
+    country: {
+      type: String,
+      required: [true, messageSchemes.required],
+    },
     year: {
       type: String,
+      required: [true, messageSchemes.required],
+    },
+    duration: {
+      type: Number,
       required: [true, messageSchemes.required],
     },
     description: {
       type: String,
       required: [true, messageSchemes.required],
     },
-    image: {
+    trailerLink: {
       type: String,
       required: [true, messageSchemes.required],
       validate(value) {
-        validateScheme.validateEmail(value);
+        validateScheme.validateURL(value);
       },
     },
-    trailerLink: {
+    image: {
       type: String,
       required: [true, messageSchemes.required],
       validate(value) {
@@ -47,18 +64,6 @@ const movieSchema = new Schema(
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'user',
-      required: [true, messageSchemes.required],
-    },
-    movieId: {
-      type: Number,
-      required: [true, messageSchemes.required],
-    },
-    nameRU: {
-      type: String,
-      required: [true, messageSchemes.required],
-    },
-    nameEN: {
-      type: String,
       required: [true, messageSchemes.required],
     },
 
