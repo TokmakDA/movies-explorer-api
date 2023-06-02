@@ -1,11 +1,12 @@
 // require('dotenv').config();
-const { JWT_SECRET_DEV, COOKIE_PARAMS, DEFAULT_ALLOWED_METHODS, COOKIE_PARAMS_DEV } = require('./constants/constants');
-
 const {
-  NODE_ENV,
-  JWT_SECRET,
-  MONGO_URL,
-} = process.env
+  JWT_SECRET_DEV,
+  COOKIE_PARAMS,
+  DEFAULT_ALLOWED_METHODS,
+  COOKIE_PARAMS_DEV,
+} = require('./constants');
+
+const { NODE_ENV, JWT_SECRET, MONGO_URL } = process.env;
 
 const allowedCors = [
   'https://praktikum.tk',
@@ -35,7 +36,10 @@ const corsOptions = {
 
 module.exports = {
   JWT_SECRET: NODE_ENV === 'production' ? JWT_SECRET : JWT_SECRET_DEV,
-  MONGO_URL: NODE_ENV === 'production' ? MONGO_URL : 'mongodb://localhost:27017/bitfilms',
+  MONGO_URL:
+    NODE_ENV === 'production'
+      ? MONGO_URL
+      : 'mongodb://localhost:27017/bitfilms',
   COOKIE_PARAMS: NODE_ENV === 'production' ? COOKIE_PARAMS : COOKIE_PARAMS_DEV,
-  corsOptions
+  corsOptions,
 };

@@ -11,8 +11,8 @@ const COOKIE_PARAMS_DEV = {
 };
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-const JWT_SECRET_DEV = 'dev-secret';
 
+const JWT_SECRET_DEV = 'dev-secret';
 
 module.exports = {
   COOKIE_PARAMS,

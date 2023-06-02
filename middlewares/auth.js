@@ -1,8 +1,9 @@
+const { AUTHORIZATION_REQUIRED_RU } = require('../constants');
 const { UnauthorizedError } = require('../errors/errors');
 const { checkToken } = require('../utils/token');
 
 module.exports = (req, res, next) => {
-  const newErr = new UnauthorizedError('Необходима авторизация');
+  const newErr = new UnauthorizedError(AUTHORIZATION_REQUIRED_RU);
   try {
     const jwtCokie = req.cookies.jwt;
     if (!jwtCokie) {

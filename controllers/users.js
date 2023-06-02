@@ -4,18 +4,7 @@ const { NotFoundError, ConflictError } = require('../errors/errors');
 // const { generateToken } = require('../utils/token');
 const { generateToken } = require('../utils/token');
 const { COOKIE_PARAMS } = require('../config');
-
-// Внести изменения в данных пользователя из базы по ID
-const setFindByIdAndUpdate = async (id, update) => {
-  const card = await Movie.findByIdAndUpdate(id, update, {
-    new: true,
-  })
-    .populate(['owner', 'likes'])
-    .orFail(() => {
-      throw new NotFoundError(`Карточка ${id} не найдена`);
-    });
-  return card;
-};
+const { NOT_FOUND_USER_RU, CONFLICT_USER_RU } = require('../constants');
 
 // Получить пользователя из базы по ID
 // Если имеем данные для изменения, то внести их
@@ -27,7 +16,7 @@ const findUserById = async (id, data) => {
       })
     : User.findById(id)
   ).orFail(() => {
-    throw new NotFoundError(`Пользователь ${id} не найден`);
+    throw new NotFoundError(NOT_FOUND_USER_RU);
   });
   // выберем нужные поля для возврата пользователю
   const dataUser = {
@@ -66,11 +55,7 @@ const createUser = (req, res, next) => {
         })
         .catch((err) => {
           if (err.code === 11000) {
-            next(
-              new ConflictError(
-                'Пользователь с введенным Вами Email уже существует',
-              ),
-            );
+            next(new ConflictError(CONFLICT_USER_RU));
           } else {
             next(err);
           }

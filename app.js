@@ -6,6 +6,7 @@ const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/loggers');
 const routes = require('./routes');
 const { MONGO_URL } = require('./config');
+const { handleError } = require('./errors/errors');
 
 const app = express();
 const { PORT = 3000} =
@@ -25,8 +26,8 @@ app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 // централизованный обработчик ошибок
 app.use((err, req, res, next) => {
-  // handleError(err, req, res, next);
-  res.json({ message: err.message }).end();
+  handleError(err, req, res, next);
+  // res.json({ message: err.message }).end();
   next();
 });
 

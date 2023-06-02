@@ -1,3 +1,4 @@
+const { NOT_FOUND_DEFAULT_RU } = require('../constants');
 const { login, createUser, signout } = require('../controllers/users');
 const { NotFoundError } = require('../errors/NotFoundError');
 const auth = require('../middlewares/auth');
@@ -13,5 +14,5 @@ module.exports = require('express')
   .use('/movies', movieRouter)
   .use('/users', userRouter)
   .use('*', (req, res, next) => {
-    next(new NotFoundError('Not found'));
+    next(new NotFoundError(NOT_FOUND_DEFAULT_RU));
   });

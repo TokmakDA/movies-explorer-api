@@ -4,7 +4,12 @@ const {
   NotFoundError,
   ConflictError,
 } = require('../errors/errors');
-const { messageOk } = require('../constants/constants');
+// const { messageOk } = require('../constants/constants');
+const {
+  CONFLICT_CARD_MOVIE_RU,
+  NOT_FOUND_CARD_MOVIE_RU,
+  FORBIDDEN_CARD_MOVIE_RU,
+} = require('../constants');
 
 // GET /movies все сохранённые пользователем фильмы (по user._id);
 const getMovies = (req, res, next) => {
@@ -42,7 +47,7 @@ const setMovie = async (req, res, next) => {
       const movie = await newMovie.populate(['owner']);
       return res.status(201).json({ data: movie });
     } else {
-      throw new ConflictError('Карточка с фильмом уже добавлена');
+      throw new ConflictError(CONFLICT_CARD_MOVIE_RU);
     }
   } catch (err) {
     next(err);
@@ -56,7 +61,7 @@ const deleteMovie = async (req, res, next) => {
     const movie = await Movie.findById(_id)
       .populate(['owner'])
       .orFail(() => {
-        throw new NotFoundError(`Карточка с фильмом ${_id} не найдена`);
+        throw new NotFoundError(NOT_FOUND_CARD_MOVIE_RU);
       });
 
     if (movie.owner._id.toString() === req.user._id.toString()) {
@@ -71,12 +76,12 @@ const deleteMovie = async (req, res, next) => {
       } else {
         console.log(
           'deleteMovie => deleteOne => Что-то пошло не так. Проверяй',
+          deletedMovie,
         );
+        next();
       }
     }
-    throw new ForbiddenError(
-      `Вы не являетесь владельцем карточки с фильмом id: ${_id}`,
-    );
+    throw new ForbiddenError(FORBIDDEN_CARD_MOVIE_RU);
   } catch (err) {
     next(err);
   }

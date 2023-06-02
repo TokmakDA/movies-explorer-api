@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
-const {
-  messageSchemes,
-  validateScheme,
-} = require('../utils/validateMongoScheme');
+const validateMongo = require('../utils/validateMongo');
+const { mongoMessage } = require('../constants');
 
 const { Schema } = mongoose;
 
@@ -10,61 +8,61 @@ const movieSchema = new Schema(
   {
     movieId: {
       type: Number,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
     nameRU: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
     nameEN: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
     director: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
     country: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
     year: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
     duration: {
       type: Number,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
     description: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
     trailerLink: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
       validate(value) {
-        validateScheme.validateURL(value);
+        validateMongo.validateURL(value);
       },
     },
     image: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
       validate(value) {
-        validateScheme.validateURL(value);
+        validateMongo.validateURL(value);
       },
     },
     thumbnail: {
       type: String,
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
       validate(value) {
-        validateScheme.validateURL(value);
+        validateMongo.validateURL(value);
       },
     },
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'user',
-      required: [true, messageSchemes.required],
+      required: [true, mongoMessage.required],
     },
 
     createdAt: {
