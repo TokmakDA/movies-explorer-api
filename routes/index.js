@@ -11,6 +11,6 @@ module.exports = require('express')
   .use(auth)
   .use('/movies', movieRouter)
   .use('/users', userRouter)
-  .use((req, res, next) => {
+  .use('*', (req, res, next) => {
     next(new NotFoundError(NOT_FOUND_DEFAULT_ERROR_RU));
   }); // 404 ошибка неверного пути
