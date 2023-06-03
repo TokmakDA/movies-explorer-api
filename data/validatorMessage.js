@@ -33,6 +33,7 @@ module.exports = {
   'any.required': 'Поле {{#label}} обязательное.',
   'any.unknown': 'Поле {{#label}} не разрешено',
   'any.custom': 'Поле {{#label}} должно быть валидным url-адресом',
+  'object.unknown': 'Поле {{#label}} не разрешено',
   'number.base': 'Поле {{#label}} должно быть числом',
   'number.greater': 'Поле {{#label}} должно быть больше, чем {{#limit}}',
   'number.infinity': 'Поле {{#label}} не может быть бесконечностью',
