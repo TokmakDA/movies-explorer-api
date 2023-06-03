@@ -4,7 +4,7 @@ const {
   NotFoundError,
   ConflictError,
   DefaltError,
-} = require('../errors/errors');
+} = require('../errors');
 // const { messageOk } = require('../constants/constants');
 const {
   CONFLICT_MOVIE_CARD_ERROR_RU,

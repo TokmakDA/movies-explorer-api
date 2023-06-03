@@ -1,5 +1,5 @@
 const { AUTHORIZATION_REQUIRED_ERROR_RU } = require('../data');
-const { UnauthorizedError } = require('../errors/errors');
+const { UnauthorizedError } = require('../errors');
 const { checkToken } = require('../utils/token');
 
 module.exports = (req, res, next) => {

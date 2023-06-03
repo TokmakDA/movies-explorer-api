@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
-const { NotFoundError, ConflictError } = require('../errors/errors');
+const { NotFoundError, ConflictError } = require('../errors');
 const { generateToken } = require('../utils/token');
 const { COOKIE_PARAMS } = require('../config');
 const {

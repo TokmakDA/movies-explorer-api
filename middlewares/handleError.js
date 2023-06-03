@@ -1,12 +1,5 @@
 const { default: mongoose } = require('mongoose');
-const { BadRequestError } = require('./BadRequestError');
-const { ConflictError } = require('./ConflictError');
-const { DefaltError } = require('./DefaltError');
-const { ForbiddenError } = require('./ForbiddenError');
-const { NotFoundError } = require('./NotFoundError');
-const { LimitterError } = require('./LimitterError');
-const { UnauthorizedError } = require('./UnauthorizedError');
-const SomeError = require('./SomeError');
+const { SomeError, BadRequestError, DefaltError } = require('../errors');
 const { DEFAULT_MESSAGE_ERROR_RU } = require('../data');
 
 // Вернуть ошибку пользователю
@@ -15,9 +8,7 @@ const returnErrorToUser = (err, req, res, next) => {
   next();
 };
 
-function handleError(err, req, res, next) {
-  console.log('handleError => err', err.statusCode, err.name, err.message);
-
+const handleError = (err, req, res, next) => {
   if (err instanceof SomeError) {
     returnErrorToUser(err, req, res, next);
   } else if (err instanceof mongoose.Error.ValidationError) {
@@ -35,15 +26,8 @@ function handleError(err, req, res, next) {
       next,
     );
   }
-}
+};
 
 module.exports = {
   handleError,
-  BadRequestError,
-  ConflictError,
-  DefaltError,
-  ForbiddenError,
-  NotFoundError,
-  LimitterError,
-  UnauthorizedError,
 };

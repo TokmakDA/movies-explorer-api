@@ -8,8 +8,9 @@ const limiter = require('./middlewares/limiter');
 const { requestLogger, errorLogger } = require('./middlewares/loggers');
 const routes = require('./routes');
 const { MONGO_URL } = require('./config');
-const { handleError, NotFoundError } = require('./errors/errors');
 const { corsOptions, NOT_FOUND_DEFAULT_ERROR_RU } = require('./data');
+const { handleError } = require('./middlewares/handleError');
+const { NotFoundError } = require('./errors');
 
 const app = express();
 const { PORT = 3000 } = process.env;
@@ -27,7 +28,7 @@ app.use(cors(corsOptions));
 app.use('/api', routes);
 app.use((req, res, next) => {
   next(new NotFoundError(NOT_FOUND_DEFAULT_ERROR_RU));
-});
+}); // 404 ошибка неверного пути
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 // централизованный обработчик ошибок

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const { UnauthorizedError } = require('../errors/errors');
 const { AUTHORIZATION_WRONG_ERROR_RU, mongoMessage } = require('../data');
 const { validateMongoEmail } = require('../middlewares/validations');
+const { UnauthorizedError } = require('../errors');
 
 const { Schema } = mongoose;
 
