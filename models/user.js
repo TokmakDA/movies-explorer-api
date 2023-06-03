@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { UnauthorizedError } = require('../errors/errors');
-const validateMongo = require('../utils/validateMongo');
-const { AUTHORIZATION_WRONG_RU, mongoMessage } = require('../constants');
+const { AUTHORIZATION_WRONG_ERROR_RU, mongoMessage } = require('../data');
+const { validateMongoEmail } = require('../middlewares/validations');
 
 const { Schema } = mongoose;
 
@@ -13,7 +13,7 @@ const userSchema = new Schema(
       required: [true, mongoMessage.maxlength],
       unique: true,
       validate(value) {
-        validateMongo.validateEmail(value);
+        validateMongoEmail(value);
       },
     },
     password: {
@@ -31,22 +31,18 @@ const userSchema = new Schema(
   { versionKey: false },
 );
 
-userSchema.statics.findUserByCredentials = function (email, password) {
-  return this.findOne({ email })
-    .select('+password') // this — это модель User
-    .then((user) => {
-      // не нашёлся — отклоняем промис
-      if (!user) {
-        return Promise.reject(new UnauthorizedError(AUTHORIZATION_WRONG_RU));
-      }
-      // нашёлся — сравниваем хеши
-      return bcrypt.compare(password, user.password).then((matched) => {
-        if (!matched) {
-          return Promise.reject(new UnauthorizedError(AUTHORIZATION_WRONG_RU));
-        }
-        return user; // вернем user
-      });
-    });
+userSchema.statics.findUserByCredentials = async function (email, password) {
+  // проверяем, существует ли пользователь
+  const userExists = await this.findOne({ email }).select('+password');
+  if (!userExists) {
+    throw new UnauthorizedError(AUTHORIZATION_WRONG_ERROR_RU);
+  }
+  // проверяем введенный пароль
+  const isPassword = await bcrypt.compare(password, userExists.password);
+  if (isPassword) {
+    throw new UnauthorizedError(AUTHORIZATION_WRONG_ERROR_RU);
+  }
+  return userExists; // вернем пользователя
 };
 
 module.exports = mongoose.model('user', userSchema);

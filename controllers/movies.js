@@ -3,22 +3,28 @@ const {
   ForbiddenError,
   NotFoundError,
   ConflictError,
+  DefaltError,
 } = require('../errors/errors');
 // const { messageOk } = require('../constants/constants');
 const {
-  CONFLICT_CARD_MOVIE_RU,
-  NOT_FOUND_CARD_MOVIE_RU,
-  FORBIDDEN_CARD_MOVIE_RU,
-} = require('../constants');
+  CONFLICT_MOVIE_CARD_ERROR_RU,
+  NOT_FOUND_MOVIE_CARD_ERROR_RU,
+  FORBIDDEN_MOVIE_CARD_ERROR_RU,
+  DEFAULT_MESSAGE_ERROR_RU,
+  MESSAGE_MOVIE_CARD_DELETED_RU,
+} = require('../data');
 
 // GET /movies все сохранённые пользователем фильмы (по user._id);
-const getMovies = (req, res, next) => {
-  Movie.find({ owner: req.user._id })
-    .populate(['owner'])
-    .then((movies) => {
-      res.json({ data: movies });
-    })
-    .catch(next);
+const getMovies = async (req, res, next) => {
+  try {
+    const movies = await Movie.find({ owner: req.user._id }).populate([
+      'owner',
+    ]);
+    res.json({ data: movies });
+    return;
+  } catch (err) {
+    next(err);
+  }
 };
 
 // POST /movies создаёт фильм с переданными в теле данными;
@@ -45,10 +51,10 @@ const setMovie = async (req, res, next) => {
     if (!checkMovie) {
       const newMovie = await Movie.create(dataCard);
       const movie = await newMovie.populate(['owner']);
-      return res.status(201).json({ data: movie });
-    } else {
-      throw new ConflictError(CONFLICT_CARD_MOVIE_RU);
+      res.status(201).json({ data: movie });
+      return;
     }
+    next(new ConflictError(CONFLICT_MOVIE_CARD_ERROR_RU));
   } catch (err) {
     next(err);
   }
@@ -61,27 +67,21 @@ const deleteMovie = async (req, res, next) => {
     const movie = await Movie.findById(_id)
       .populate(['owner'])
       .orFail(() => {
-        throw new NotFoundError(NOT_FOUND_CARD_MOVIE_RU);
+        next(new NotFoundError(NOT_FOUND_MOVIE_CARD_ERROR_RU));
       });
 
-    if (movie.owner._id.toString() === req.user._id.toString()) {
-      console.log(
-        'deleteMovie => deleteMovie =   return deleteMovie.deleteOne()',
-      );
+    if (movie.owner._id.toString() !== req.user._id.toString()) {
+      next(new ForbiddenError(FORBIDDEN_MOVIE_CARD_ERROR_RU));
+    } else {
       const deletedMovie = await movie.deleteOne();
       if (deletedMovie) {
-        return res.json({
-          message: `Карточка с фильмом id: ${_id} успешно удалена`,
+        res.json({
+          message: MESSAGE_MOVIE_CARD_DELETED_RU,
         });
-      } else {
-        console.log(
-          'deleteMovie => deleteOne => Что-то пошло не так. Проверяй',
-          deletedMovie,
-        );
-        next();
+        return;
       }
+      next(new DefaltError(DEFAULT_MESSAGE_ERROR_RU));
     }
-    throw new ForbiddenError(FORBIDDEN_CARD_MOVIE_RU);
   } catch (err) {
     next(err);
   }

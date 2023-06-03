@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const validateMongo = require('../utils/validateMongo');
-const { mongoMessage } = require('../constants');
+const { mongoMessage } = require('../data');
+const { validateMongoURL } = require('../middlewares/validations');
 
 const { Schema } = mongoose;
 
@@ -42,21 +42,21 @@ const movieSchema = new Schema(
       type: String,
       required: [true, mongoMessage.required],
       validate(value) {
-        validateMongo.validateURL(value);
+        validateMongoURL(value);
       },
     },
     image: {
       type: String,
       required: [true, mongoMessage.required],
       validate(value) {
-        validateMongo.validateURL(value);
+        validateMongoURL(value);
       },
     },
     thumbnail: {
       type: String,
       required: [true, mongoMessage.required],
       validate(value) {
-        validateMongo.validateURL(value);
+        validateMongoURL(value);
       },
     },
     owner: {
@@ -64,7 +64,6 @@ const movieSchema = new Schema(
       ref: 'user',
       required: [true, mongoMessage.required],
     },
-
     createdAt: {
       type: Date,
       default: Date.now,
