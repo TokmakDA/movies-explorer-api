@@ -8,6 +8,10 @@ const allowedCors = [
   'http://localhost:3001',
   'http://192.168.1.212:3001',
   'http://192.168.1.212:3000',
+  'https://api.diploma.tokmak.nomoredomains.rocks',
+  'http://api.diploma.tokmak.nomoredomains.rocks',
+  'http://diploma.tokmak.nomoredomains.rocks',
+  'https://diploma.tokmak.nomoredomains.rocks',
 ];
 const corsOptions = {
   origin: allowedCors,
