@@ -7,6 +7,7 @@ const { NotFoundError } = require('./NotFoundError');
 const { LimitterError } = require('./LimitterError');
 const { UnauthorizedError } = require('./UnauthorizedError');
 const SomeError = require('./SomeError');
+const { DEFAULT_MESSAGE_ERROR_RU } = require('../data');
 
 // Вернуть ошибку пользователю
 const returnErrorToUser = (err, req, res, next) => {
@@ -15,12 +16,7 @@ const returnErrorToUser = (err, req, res, next) => {
 };
 
 function handleError(err, req, res, next) {
-  console.log(
-    'handleError => err',
-    err.statusCode,
-    err.name,
-    err.message,
-  );
+  console.log('handleError => err', err.statusCode, err.name, err.message);
 
   if (err instanceof SomeError) {
     returnErrorToUser(err, req, res, next);
@@ -33,7 +29,7 @@ function handleError(err, req, res, next) {
     returnErrorToUser(new BadRequestError(err), req, res, next);
   } else {
     returnErrorToUser(
-      new DefaltError('Что-то пошло не так. Внутренняя ошибка сервера.'),
+      new DefaltError(DEFAULT_MESSAGE_ERROR_RU),
       req,
       res,
       next,

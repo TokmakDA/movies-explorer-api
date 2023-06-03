@@ -31,6 +31,7 @@ module.exports = {
   'string.uppercase': 'Поле {{#label}} должно содержать только заглавные символы',
   'string.lowercase': 'Поле {{#label}} должно содержать только строчные символы',
   'any.required': 'Поле {{#label}} обязательное.',
+  'any.unknown': 'Поле {{#label}} не разрешено',
   'any.custom': 'Поле {{#label}} должно быть валидным url-адресом',
   'number.base': 'Поле {{#label}} должно быть числом',
   'number.greater': 'Поле {{#label}} должно быть больше, чем {{#limit}}',
