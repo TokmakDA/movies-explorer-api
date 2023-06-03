@@ -39,6 +39,19 @@ const validateURL = (value, helpers) => {
   return helpers.messages(validatorMessage);
 };
 
+const cardConfig = {
+  pathNumber: Joi.number()
+    .required()
+    .messages(validatorMessage),
+  pathString: Joi.string()
+    .required()
+    .messages(validatorMessage),
+  pathLink: Joi.string()
+    .required()
+    .custom((value, helpers) => validateURL(value, helpers))
+    .messages(validatorMessage),
+};
+
 const validateCreateUser = celebrate({
   body: Joi.object().keys(userConfig),
 });
@@ -68,53 +81,17 @@ const validateId = celebrate({
 
 const validateCard = celebrate({
   body: Joi.object().keys({
-    movieId: Joi.number()
-      .required()
-      .label('movieId')
-      .messages(validatorMessage),
-    nameRU: Joi.string()
-      .required()
-      .label('nameRU')
-      .messages(validatorMessage),
-    nameEN: Joi.string()
-      .required()
-      .label('nameEN')
-      .messages(validatorMessage),
-    director: Joi.string()
-      .required()
-      .label('director')
-      .messages(validatorMessage),
-    country: Joi.string()
-      .required()
-      .label('country')
-      .messages(validatorMessage),
-    year: Joi.string()
-      .required()
-      .label('year')
-      .messages(validatorMessage),
-    duration: Joi.number()
-      .required()
-      .label('duration')
-      .messages(validatorMessage),
-    description: Joi.string()
-      .required()
-      .label('year')
-      .messages(validatorMessage),
-    trailerLink: Joi.string()
-      .required()
-      .label('trailerLink')
-      .custom((value, helpers) => validateURL(value, helpers))
-      .messages(validatorMessage),
-    image: Joi.string()
-      .required()
-      .label('image')
-      .custom((value, helpers) => validateURL(value, helpers))
-      .messages(validatorMessage),
-    thumbnail: Joi.string()
-      .required()
-      .label('image')
-      .custom((value, helpers) => validateURL(value, helpers))
-      .messages(validatorMessage),
+    movieId: cardConfig.pathNumber,
+    nameRU: cardConfig.pathString,
+    nameEN: cardConfig.pathString,
+    director: cardConfig.pathString,
+    country: cardConfig.pathString,
+    year: cardConfig.pathString,
+    duration: cardConfig.pathNumber,
+    description: cardConfig.pathString,
+    trailerLink: cardConfig.pathLink,
+    image: cardConfig.pathLink,
+    thumbnail: cardConfig.pathLink,
   }),
 });
 
