@@ -59,13 +59,13 @@ const validateUpdateUser = celebrate({
   body: Joi.object().keys({
     name: userConfig.name,
     email: userConfig.name,
-  }),
+  }).messages(validatorMessage),
 });
 const validateLogin = celebrate({
   body: Joi.object().keys({
     email: userConfig.email,
     password: userConfig.password,
-  }),
+  }).messages(validatorMessage),
 });
 
 const validateId = celebrate({
@@ -76,7 +76,7 @@ const validateId = celebrate({
       .required()
       .label('ID')
       .messages(validatorMessage),
-  }),
+  }).messages(validatorMessage),
 });
 
 const validateCard = celebrate({
@@ -92,7 +92,7 @@ const validateCard = celebrate({
     trailerLink: cardConfig.pathLink,
     image: cardConfig.pathLink,
     thumbnail: cardConfig.pathLink,
-  }),
+  }).messages(validatorMessage),
 });
 
 module.exports = {
