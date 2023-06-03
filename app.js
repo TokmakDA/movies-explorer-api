@@ -24,7 +24,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors(corsOptions));
-app.use('/', routes);
+app.use(routes);
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 // централизованный обработчик ошибок
