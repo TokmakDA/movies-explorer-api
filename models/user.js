@@ -39,7 +39,7 @@ userSchema.statics.findUserByCredentials = async function (email, password) {
   }
   // проверяем введенный пароль
   const isPassword = await bcrypt.compare(password, userExists.password);
-  if (isPassword) {
+  if (!isPassword) {
     throw new UnauthorizedError(AUTHORIZATION_WRONG_ERROR_RU);
   }
   return userExists; // вернем пользователя
