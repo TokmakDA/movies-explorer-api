@@ -16,7 +16,7 @@ Node.js Express
 ## Адрес домена
 IP 158.160.18.157
 Frontend https://diploma.tokmak.nomoredomains.rocks
-Backend https://api.diploma.tokmak.nomoredomains.rocks/api/
+Backend https://api.diploma.tokmak.nomoredomains.rocks/api
 
 ### Автор проекта
 **_Токмак Дмитрий Андреевич_**

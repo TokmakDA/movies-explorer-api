@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../config');
+const { UnauthorizedError } = require('../errors');
+const { AUTHORIZATION_REQUIRED_ERROR_RU } = require('../data');
 
 const generateToken = (payload) => {
   const token = jwt.sign(payload, JWT_SECRET, {
@@ -10,14 +12,9 @@ const generateToken = (payload) => {
 
 const checkToken = (token) => {
   if (!token) {
-    return false;
+    return new UnauthorizedError(AUTHORIZATION_REQUIRED_ERROR_RU);
   }
-  try {
-    const payload = jwt.verify(token, JWT_SECRET);
-    return payload;
-  } catch (e) {
-    return false;
-  }
+  return jwt.verify(token, JWT_SECRET);
 };
 
 module.exports = {

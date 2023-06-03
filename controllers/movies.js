@@ -80,7 +80,6 @@ const deleteMovie = async (req, res, next) => {
         });
         return;
       }
-      next(new DefaltError(DEFAULT_MESSAGE_ERROR_RU));
     }
   } catch (err) {
     next(err);

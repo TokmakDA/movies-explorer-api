@@ -25,10 +25,7 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors(corsOptions));
-app.use('/api', routes);
-app.use((req, res, next) => {
-  next(new NotFoundError(NOT_FOUND_DEFAULT_ERROR_RU));
-}); // 404 ошибка неверного пути
+app.use(routes);
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 // централизованный обработчик ошибок
