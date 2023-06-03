@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use('/api', routes);
-app.use('*', (req, res, next) => {
+app.use((req, res, next) => {
   next(new NotFoundError(NOT_FOUND_DEFAULT_ERROR_RU));
 });
 app.use(errorLogger); // подключаем логгер ошибок
