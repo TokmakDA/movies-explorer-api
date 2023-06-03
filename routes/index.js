@@ -7,7 +7,7 @@ const userRouter = require('./users');
 
 module.exports = require('express')
   .Router()
-  .use('/', signRouter)
+  .use(signRouter)
   .use(auth)
   .use('/movies', movieRouter)
   .use('/users', userRouter)
