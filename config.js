@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const { JWT_SECRET_DEV, COOKIE_PARAMS, COOKIE_PARAMS_DEV } = require('./data');
 
 const { NODE_ENV, JWT_SECRET, MONGO_URL } = process.env;
