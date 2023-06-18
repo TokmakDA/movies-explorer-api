@@ -1,0 +1,11 @@
+const SomeError = require('./SomeError');
+
+class DefaltError extends SomeError {
+  constructor(message) {
+    super(message);
+    this.statusCode = 500;
+    this.name = 'DefaltError';
+  }
+}
+
+module.exports = { DefaltError };
