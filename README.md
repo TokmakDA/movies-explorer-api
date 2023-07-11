@@ -14,9 +14,9 @@ Node.js Express
 ## [Планер](https://www.notion.so/bbac09ef519a4a5dae81c4fd3c9ca8a0?v=b284217a977b4b4da035803a3f2c5622&pvs=4)
 
 ## Адрес домена
-IP 158.160.18.157
+IP 51.250.20.233
 Frontend https://diploma.tokmak.nomoredomains.rocks
-Backend https://api.diploma.tokmak.nomoredomains.rocks/api
+Backend https://api.diploma.tokmak.nomoredomains.rocks
 
 ### Автор проекта
 **_Токмак Дмитрий Андреевич_**
