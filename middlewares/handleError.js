@@ -1,6 +1,14 @@
 const { default: mongoose } = require('mongoose');
-const { SomeError, BadRequestError, DefaltError } = require('../errors');
-const { DEFAULT_MESSAGE_ERROR_RU } = require('../data');
+const {
+  SomeError,
+  BadRequestError,
+  DefaltError,
+  ConflictError,
+} = require('../errors');
+const {
+  DEFAULT_MESSAGE_ERROR_RU,
+  CONFLICT_USER_CARD_ERROR_RU,
+} = require('../data');
 
 // Вернуть ошибку пользователю
 const returnErrorToUser = (err, req, res, next) => {
@@ -18,6 +26,13 @@ const handleError = (err, req, res, next) => {
     returnErrorToUser(new BadRequestError(message), req, res, next);
   } else if (err instanceof mongoose.Error.CastError) {
     returnErrorToUser(new BadRequestError(err), req, res, next);
+  } else if (err.code === 11000) {
+    returnErrorToUser(
+      new ConflictError(CONFLICT_USER_CARD_ERROR_RU),
+      req,
+      res,
+      next,
+    );
   } else {
     returnErrorToUser(
       new DefaltError(DEFAULT_MESSAGE_ERROR_RU),

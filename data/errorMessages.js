@@ -1,7 +1,7 @@
 const DEFAULT_MESSAGE_ERROR_RU = 'На сервере произошла ошибка.';
 const CONFLICT_MOVIE_CARD_ERROR_RU = 'Карточка с фильмом уже добавлена.';
 const CONFLICT_USER_CARD_ERROR_RU =
-  'Пользователь с введенным Email уже существует.';
+  'Пользователь с таким email уже существует.';
 const FORBIDDEN_MOVIE_CARD_ERROR_RU =
   'Вы не являетесь владельцем данной карточки с фильмом.';
 const NOT_FOUND_USER_CARD_ERROR_RU = 'Пользователь не найден.';
