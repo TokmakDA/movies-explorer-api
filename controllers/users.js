@@ -73,11 +73,7 @@ const createUser = async (req, res, next) => {
       },
     });
   } catch (err) {
-    if (err.code === 11000) {
-      next(new ConflictError(CONFLICT_USER_CARD_ERROR_RU));
-    } else {
-      next(err);
-    }
+    next(err);
   }
 };
 
