@@ -12,7 +12,13 @@ const allowedCors = [
   'http://api.diploma.tokmak.nomoredomains.rocks',
   'http://diploma.tokmak.nomoredomains.rocks',
   'https://diploma.tokmak.nomoredomains.rocks',
+
+  'https://diploma.1827093-cy37517.twc1.net',
+  'http://diploma.1827093-cy37517.twc1.net',
+  'http://api.diploma.1827093-cy37517.twc1.net',
+  'https://api.diploma.1827093-cy37517.twc1.net',
 ];
+
 const corsOptions = {
   origin: allowedCors,
   methods: DEFAULT_ALLOWED_METHODS,
