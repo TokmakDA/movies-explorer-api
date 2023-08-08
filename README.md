@@ -1,24 +1,31 @@
-# movies-explorer-api
+# Diploma project - Backend
+
 Node.js Express
 
 ## О Дипломном проекте
-Бэкенд сервиса, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
+
+Бэкенд сервиса, в котором можно найти фильмы по запросу и сохранить в личном
+кабинете.
+
 ### Основной функционал
-- Добавление пользователя. 
+
+- Добавление пользователя.
 - Редактирование данных (Имя и Email).
 - Добавление и удаление карточек с понравившимися фильмами.
 - Защита авторизацией.
 - Защита от удаления чужих карточек.
 - Хранение данных в БД MongooseBD 6.0
 
-## [Планер](https://www.notion.so/bbac09ef519a4a5dae81c4fd3c9ca8a0?v=b284217a977b4b4da035803a3f2c5622&pvs=4)
+## Ссылки на проект
 
-## Адрес домена
-IP 51.250.20.233
-Frontend https://diploma.tokmak.nomoredomains.rocks
-Backend https://api.diploma.tokmak.nomoredomains.rocks
+- IP: 81.200.146.157
+- [Frontend](https://diploma.1827093-cy37517.twc1.net)
+- [Backend](https://api.diploma.1827093-cy37517.twc1.net)
+- [Планер](https://www.notion.so/bbac09ef519a4a5dae81c4fd3c9ca8a0?v=b284217a977b4b4da035803a3f2c5622&pvs=4)
+- [Проект Figma](https://disk.yandex.ru/d/OWzffpJIrTRPpQ)
 
 ### Автор проекта
+
 **_Токмак Дмитрий Андреевич_**
 
 **_студент Яндекс Практикума 59 кагорты_**
