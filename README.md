@@ -19,8 +19,8 @@ Node.js Express
 ## Ссылки на проект
 
 - IP: 81.200.146.157
-- [Frontend](https://diploma.1827093-cy37517.twc1.net)
-- [Backend](https://api.diploma.1827093-cy37517.twc1.net)
+- [Frontend](https://diploma.e-tokmak.ru)
+- [Backend](https://api.diploma.e-tokmak.ru)
 - [Планер](https://www.notion.so/bbac09ef519a4a5dae81c4fd3c9ca8a0?v=b284217a977b4b4da035803a3f2c5622&pvs=4)
 - [Проект Figma](https://disk.yandex.ru/d/OWzffpJIrTRPpQ)
 
