@@ -17,6 +17,13 @@ const allowedCors = [
   'http://diploma.1827093-cy37517.twc1.net',
   'http://api.diploma.1827093-cy37517.twc1.net',
   'https://api.diploma.1827093-cy37517.twc1.net',
+
+  'https://diploma.e-tokmak.ru',
+  'http://diploma.e-tokmak.ru',
+  'http://api.diploma.e-tokmak.ru',
+  'https://api.diploma.e-tokmak.ru',
+  'http://e-tokmak.ru',
+  'https://e-tokmak.ru',
 ];
 
 const corsOptions = {
